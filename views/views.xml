@@ -1,0 +1,313 @@
+<odoo>
+  <data>
+    <!-- QWeb Reports -->
+    <!-- NAME & FILE_NAME should be the same -->
+
+
+              <menuitem icon="STOCK_PRINT" id="menu_taybahreport"
+                name="Taybah Reports"
+                 parent="account.menu_finance_reports"/>
+      <!--start report of Journal Transaction Report report-->
+              <record id="account_journalcartreport_view" model="ir.ui.view">
+                <field name="name">account_journalcartreport_view</field>
+                <field name="model">account.journalcartreport</field>
+                <field name="arch" type="xml">
+                    <form string="Report Options">
+                        
+                        <group>
+                              <field name="account_move" domain="['|',('type','like','cash'),('type','like','bank')]" 
+options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True}"/>
+                            <newline/>
+
+                        </group>
+                         <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_end"/>
+                            <newline/>
+
+                        </group>
+
+                        <footer>
+                            <button name="print_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+                            or
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+              <record id="action_account_journalcartreport_view" model="ir.actions.act_window">
+                <field name="name">journal card report</field>
+                <field name="res_model">account.journalcartreport</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="account_journalcartreport_view"/>
+                <field name="context">{}</field>
+                <field name="target">new</field>
+            </record>
+              <menuitem icon="STOCK_PRINT" id="menu_productreport"
+                name="journal card report"
+                action="action_account_journalcartreport_view"
+                parent="menu_taybahreport"/>
+              <report
+                    id="account_journalcartreport_action"
+                    model="account.journalcartreport"
+                    report_type="qweb-html"
+                    string="journal cart report"
+                    name="taybah_report.report_journalcartreport"
+                    file="taybah_report.report_journalcartreport"
+            />
+      <!--end report of Journal Transaction Report report-->
+
+      <!--start report of Customer Transaction Report report-->
+              <record id="account_cutomertransactionreport_view" model="ir.ui.view">
+                <field name="name">account_cutomertransactionreport_view</field>
+                <field name="model">account.cutomertransactionreport</field>
+                <field name="arch" type="xml">
+                    <form string="Report Options">
+                        <separator string="Customer transaction report"/>
+                        <group>
+                              <field name="account_Customer" domain="[('customer','=','True')]"
+options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True}"/>
+                            <newline/>
+
+                        </group>
+                         <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_end"/>
+                            <newline/>
+
+                        </group>
+
+                        <footer>
+                            <button name="print_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+                            or
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+              <record id="action_account_cutomertransactionreport_view" model="ir.actions.act_window">
+                <field name="name">CustomerTransactionReport</field>
+                <field name="res_model">account.cutomertransactionreport</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="account_cutomertransactionreport_view"/>
+                <field name="context">{}</field>
+                <field name="target">new</field>
+            </record>
+              <menuitem icon="STOCK_PRINT" id="menu_customertransactionreport"
+                name="Customer Transaction report"
+                action="action_account_cutomertransactionreport_view"
+                parent="menu_taybahreport"/>
+
+               <record id="account_vendortransactionreport_view" model="ir.ui.view">
+                <field name="name">account_cutomertransactionreport_view</field>
+                <field name="model">account.cutomertransactionreport</field>
+                <field name="arch" type="xml">
+                    <form string="Report Options">
+                        <separator string="Vendor transaction report"/>
+                        <group>
+                              <field name="account_Customer" domain="[('supplier','=','True')]"
+options="{'no_quick_create': True, 'no_create_edit' : True,'no_open':True}"/>
+                            <newline/>
+
+                        </group>
+                         <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_end"/>
+                            <newline/>
+
+                        </group>
+
+                        <footer>
+                            <button name="print_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+                            or
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+                <record id="action_account_vendortransactionreport_view" model="ir.actions.act_window">
+                <field name="name">CustomerTransactionReport</field>
+                <field name="res_model">account.cutomertransactionreport</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="account_vendortransactionreport_view"/>
+                <field name="context">{}</field>
+                <field name="target">new</field>
+            </record>
+               <menuitem icon="STOCK_PRINT" id="menu_vendortransactionreport"
+                name="Vendor Transaction report"
+                action="action_account_vendortransactionreport_view"
+                parent="menu_taybahreport"/>
+              <report
+                    id="account_customertransactionreport_action"
+                    model="account.cutomertransactionreport"
+                    report_type="qweb-html"
+                    string="Customer Transactions report"
+                    name="taybah_report.report_cutomertransactionreport"
+                    file="taybah_report.report_cutomertransactionreport"
+            />
+      <!--end report of Customer Transaction Report report-->
+
+
+              <!-->customer balance report <-->
+      <record id="account_customerbalancereport_view" model="ir.ui.view">
+                <field name="name">account_customerbalancereport_view</field>
+                <field name="model">account.customerbalancereport</field>
+                <field name="arch" type="xml">
+                    <form string="Report Options">
+                        <group>
+
+                            <newline/>
+
+                        </group>
+                         <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_end"/>
+                            <newline/>
+
+                        </group>
+
+                        <footer>
+                            <button name="print_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+                            or
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+      <record id="action_account_customerbalancereport_view" model="ir.actions.act_window">
+                <field name="name">Customer Balance Report</field>
+                <field name="res_model">account.customerbalancereport</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="account_customerbalancereport_view"/>
+                <field name="context">{}</field>
+                <field name="target">new</field>
+            </record>
+      <menuitem icon="STOCK_PRINT" id="menu_customerbalancereport"
+                name="Customer Balance report"
+                action="action_account_customerbalancereport_view"
+                parent="taybah_report.menu_taybahreport"/>
+       <report
+                    id="account_customerbalancereport_action"
+                    model="account.customerbalancereport"
+                    report_type="qweb-html"
+                    string="Customer Balance report"
+                    name="taybah_report.report_cbr"
+                    file="taybah_report.report_cbr"
+            />
+    <!-->vendor balance report <-->
+    <record id="account_vendorbalancereport_view" model="ir.ui.view">
+                <field name="name">account_vendorbalancereport_view</field>
+                <field name="model">account.vendorbalancereport</field>
+                <field name="arch" type="xml">
+                    <form string="Report Options">
+                        <group>
+
+                            <newline/>
+
+                        </group>
+                         <group col="4">
+                            <field name="date_from"/>
+                            <field name="date_end"/>
+                            <newline/>
+
+                        </group>
+
+                        <footer>
+                            <button name="print_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+                            or
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </form>
+                </field>
+            </record>
+      <record id="action_account_vendorbalancereport_view" model="ir.actions.act_window">
+                <field name="name">Vendor Balance Report</field>
+                <field name="res_model">account.vendorbalancereport</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_type">form</field>
+                <field name="view_mode">tree,form</field>
+                <field name="view_id" ref="account_vendorbalancereport_view"/>
+                <field name="context">{}</field>
+                <field name="target">new</field>
+            </record>
+      <menuitem icon="STOCK_PRINT" id="menu_vendorbalancereport"
+                name="Vendor Balance report"
+                action="action_account_vendorbalancereport_view"
+                parent="taybah_report.menu_taybahreport"/>
+       <report
+                    id="account_vendorbalancereport_action"
+                    model="account.vendorbalancereport"
+                    report_type="qweb-html"
+                    string="Vendor Balance report"
+                    name="taybah_report.report_vbr"
+                    file="taybah_report.report_vbr"
+            />
+
+
+
+
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="taybah_report.list">
+      <field name="name">taybah_report list</field>
+      <field name="model">taybah_report.taybah_report</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="taybah_report.action_window">
+      <field name="name">taybah_report window</field>
+      <field name="res_model">taybah_report.taybah_report</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="taybah_report.action_server">
+      <field name="name">taybah_report server</field>
+      <field name="model_id" ref="model_leadreport_leadreport"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="taybah_report" id="taybah_report.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="taybah_report.menu_1" parent="taybah_report.menu_root"/>
+    <menuitem name="Menu 2" id="taybah_report.menu_2" parent="taybah_report.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="taybah_report.menu_1_list" parent="taybah_report.menu_1"
+              action="taybah_report.action_window"/>
+    <menuitem name="Server to list" id="taybah_report" parent="taybah_report.menu_2"
+              action="taybah_report.action_server"/>
+    -->
+  </data>
+</odoo>

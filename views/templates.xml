@@ -1,0 +1,361 @@
+<odoo>
+    <data>
+
+
+
+
+        <!--this template of Journal Transaction Report-->
+         <template id="report_journalcartreport">
+            <t t-call="report.html_container">
+                <t t-call="report.internal_layout">
+                    <!-- <t t-call="report.external_layout"> -->
+                    <div class="page">
+                        <h2> journal card report</h2>
+                         <div class="row mt32">
+
+                              <div class="col-xs-3">
+                                <strong>journal Name:</strong>
+                                <p  t-esc="data['name']"/>
+                            </div>
+
+                            <div class="col-xs-3">
+                                <strong >Date From:</strong>
+                                <p  t-esc="data['date_from']"/>
+                            </div>
+                             <div class="col-xs-3">
+                                <strong>Date To:</strong>
+                                <p  t-esc="data['date_end']"/>
+                            </div>
+
+                        </div>
+                        <div class="row mt32">
+                            <div class="col-xs-3">
+                                <strong>beforeNetVal:</strong>
+                                <p  t-esc="beforenetval"/>
+                            </div>
+                             <div class="col-xs-3">
+                                <strong>total inVal:</strong>
+                                <p  t-esc="totalinval"/>
+                            </div>
+                             <div class="col-xs-3">
+                                <strong>total outVal:</strong>
+                                <p  t-esc="totaloutval"/>
+                            </div>
+                            <div class="col-xs-3">
+
+                                <span>
+                                    <strong>total netval:</strong>
+                                    <p  t-esc="totalnetval"/>
+                                </span>
+                                <!-->
+                                 <span t-if="(totalqty &lt; 10 )">
+                                    <strong>totalqty:</strong>
+                                    <p  t-esc="totalqty"/>
+                                </span>
+                                <!-->
+                            </div>
+
+                        </div>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <tr>
+                                    <th ><span >date</span></th>
+                                     <th>type</th>
+                                     <th>name</th>
+                                     <th>InVal</th>
+                                     <th>OutVal</th>
+                                    <th>NetVal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="get_lead_lines" t-as="lead">
+                                    <td>
+                                        <span t-esc="lead['payment_date']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['payment_type']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['name']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['inval']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['outval']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['netval']"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <!--this template of Customer Transaction Report-->
+         <template id="report_cutomertransactionreport">
+            <t t-call="report.html_container">
+                <t t-call="report.internal_layout">
+                    <!-- <t t-call="report.external_layout"> -->
+                    <div class="page">
+                        <h2> Customer Transaction report</h2>
+                         <div class="row mt32">
+
+                              <div class="col-xs-3">
+                                <strong>Customer Name:</strong>
+                                <p  t-esc="data['name']"/>
+                            </div>
+                            <div class="col-xs-3">
+                                <strong>Date From:</strong>
+                                <p  t-esc="data['date_from']"/>
+                            </div>
+                             <div class="col-xs-3">
+                                <strong>Date To:</strong>
+                                <p  t-esc="data['date_end']"/>
+                            </div>
+
+                        </div>
+                        <div class="row mt32">
+                            <div class="col-xs-3">
+                                <strong>OPening Balance:</strong>
+                                <p  t-esc="FirstBal"/>
+                            </div>
+                             <div class="col-xs-3">
+                                <strong>total debit:</strong>
+                                <p  t-esc="totaldebit"/>
+                            </div>
+                             <div class="col-xs-3">
+                                <strong>total credit:</strong>
+                                <p  t-esc="totalcredit"/>
+                            </div>
+                            <div class="col-xs-3">
+
+                                <span>
+                                    <strong>current Balance:</strong>
+                                    <p  t-esc="totalnetbal"/>
+                                </span>
+                                <!-->
+                                 <span t-if="(totalqty &lt; 10 )">
+                                    <strong>totalqty:</strong>
+                                    <p  t-esc="totalqty"/>
+                                </span>
+                                <!-->
+                            </div>
+
+                        </div>
+                        <table class="table table-condensed table-ordered">
+                            <thead>
+                                <tr>
+                                    <th ><span >date</span></th>                                     <th>transaction</th>
+                                     <th>transnumber</th>
+                                     <th>debit</th>
+                                     <th>credit</th>
+                                    <th>netbal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="get_lead_lines" t-as="lead">
+                                    <td>
+                                        <span t-esc="lead['transdate']"/>
+                                    </td>
+                                    
+                                    <td>
+                                        <span t-esc="lead['transtype']"/>
+                                    </td>
+                                     <td>
+                                        <span t-esc="lead['transnumber']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['debit']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['credit']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['netbal']"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="report_cbr">
+            <t t-call="report.html_container">
+                <t t-call="report.internal_layout">
+                    <!-- <t t-call="report.external_layout"> -->
+                    <div class="page">
+                        <h2> Customer Balance report</h2>
+                         <div class="row mt32">
+                            <div class="col-xs-3">
+                                <strong>Date From:</strong>
+                                <p  t-esc="data['date_from']"/>
+                            </div>
+                             <div class="col-xs-3">
+                                <strong>Date To:</strong>
+                                <p  t-esc="data['date_end']"/>
+                            </div>
+
+
+                        </div>
+
+                        <table class="table table-condensed table-ordered">
+                            <thead>
+                                <tr>
+                                    <th ><span >id</span></th>
+                                     <th>name</th>
+                                     <th>first_bal</th>
+                                     <th>dbt</th>
+                                    <th>crd</th>
+                                    <th>net</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="get_lead_lines" t-as="lead">
+                                    <td>
+                                        <span t-esc="lead['id']"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-esc="lead['name']"/>
+                                    </td>
+                                     <td>
+                                        <span t-esc="lead['first_bal']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['dbt']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['crd']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['net']"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row mt32">
+
+
+                            <div class="col-xs-3">
+
+                                <span>
+                                    <strong>net sum:</strong>
+                                    <p  t-esc="netval"/>
+                                </span>
+                                <!-->
+                                 <span t-if="(totalqty &lt; 10 )">
+                                    <strong >totalqty:</strong>
+                                    <p  t-esc="totalqty"/>
+                                </span>
+                                <!-->
+                            </div>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+         <template id="report_vbr">
+            <t t-call="report.html_container">
+                <t t-call="report.internal_layout">
+                    <!-- <t t-call="report.external_layout"> -->
+                    <div class="page">
+                        <h2> Vendor Balance report</h2>
+                         <div class="row mt32">
+                            <div class="col-xs-3">
+                                <strong>Date From:</strong>
+                                <p  t-esc="data['date_from']"/>
+                            </div>
+                             <div class="col-xs-3">
+                                <strong>Date To:</strong>
+                                <p  t-esc="data['date_end']"/>
+                            </div>
+
+
+                        </div>
+
+                        <table class="table table-condensed table-ordered">
+                            <thead>
+                                <tr>
+                                    <th ><span >id</span></th>
+                                     <th>name</th>
+                                     <th>first_bal:</th>
+                                     <th>dbt</th>
+                                    <th>crd</th>
+                                    <th>net</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="get_lead_lines" t-as="lead">
+                                    <td>
+                                        <span t-esc="lead['id']"/>
+                                    </td>
+
+                                    <td>
+                                        <span t-esc="lead['name']"/>
+                                    </td>
+                                     <td>
+                                        <span t-esc="lead['first_bal']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['dbt']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['crd']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="lead['net']"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row mt32">
+
+
+                            <div class="col-xs-3">
+
+                                <span>
+                                    <strong>net sum:</strong>
+                                    <p  t-esc="netval"/>
+                                </span>
+                                <!-->
+                                 <span t-if="(totalqty &lt; 10 )">
+                                    <strong class="btn-danger">totalqty:</strong>
+                                    <p  t-esc="totalqty"/>
+                                </span>
+                                <!-->
+                            </div>
+
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <!-- <template id="listing"> -->
+        <!--   <ul> -->
+        <!--     <li t-foreach="objects" t-as="object"> -->
+        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
+        <!--         <t t-esc="object.display_name"/> -->
+        <!--       </a> -->
+        <!--     </li> -->
+        <!--   </ul> -->
+        <!-- </template> -->
+        <!-- <template id="object"> -->
+        <!--   <h1><t t-esc="object.display_name"/></h1> -->
+        <!--   <dl> -->
+        <!--     <t t-foreach="object._fields" t-as="field"> -->
+        <!--       <dt><t t-esc="field"/></dt> -->
+        <!--       <dd><t t-esc="object[field]"/></dd> -->
+        <!--     </t> -->
+        <!--   </dl> -->
+        <!-- </template> -->
+    </data>
+</odoo>
